@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.4.0/css/all.css"
+    />
+    <!-- làm mượt animation scroll-nav-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="public/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="public/css/style.css" />
+  </head>
+
+  <body ng-app="myApp" ng-controller="mainController">
+    <div class="container-fluid nav_top">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand" href="index.html">QuizPoly</a>
+              <button
+                class="navbar-toggler bg-body-tertiary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#/"
+                      >Trang chủ</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="intro">Giới thiệu</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="contact">Liên hệ</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                    <a
+                      ng-show="!user"
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Tài khoản
+                    </a>
+
+                    <ul class="dropdown-menu">
+                      <!--Khi đã login thì cho nó mất -> !user -->
+                      <li ng-show="!user">
+                        <a class="dropdown-item" href="v_login.html"
+                          >Đăng nhập</a
+                        >
+                      </li>
+                      <li ng-show="!user">
+                        <a class="dropdown-item" href="v_register.html"
+                          >Đăng ký</a
+                        >
+                      </li>
+                      <!--Khi đã login thì cho nó hiện -> user -->
+                      <li ng-show="user">
+                        <a class="dropdown-item" href="ketqua/{{user.id}}"
+                          >Xem điểm</a
+                        >
+                      </li>
+                      <li ng-show="user">
+                        <a class="dropdown-item" href="editAccount"
+                          >Sửa tài khoản</a
+                        >
+                      </li>
+                      <li ng-show="user">
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0)"
+                          ng-click="logout()"
+                          >Đăng xuất</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex ms-auto">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Tìm kiếm tại đây"
+                    aria-label="Search"
+                    ng-model="searchQuiz"
+                  />
+                  <button class="btn button_header" type="submit">
+                    Tìm kiếm
+                  </button>
+                </form>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card text-bg-dark border-0 rounded-0">
+        <img
+          src="public/img/banner.png"
+          class="card-img object-fit-cover rounded-0"
+          alt="..."
+          style="height: 500px"
+        />
+        <div
+          class="card-img-overlay d-flex align-items-center justify-content-center text-dark"
+        >
+          <div class="text-center">
+            <p class="card-text fs-3">Chào mừng bạn đến với</p>
+            <h1 class="card-title display-3 fw-bolder">Thế giới trắc nghiệm</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mt-5">
+            <ul class="list-group categpry_a">
+              <li
+                class="list-group-item rounded-0 border-0 active list_left"
+                aria-current="true"
+              >
+                Chủ đề
+              </li>
+              <li ng-repeat="" class="list-group-item">
+                <a href="v_catagory.html" class="text-dark"
+                  >Công nghệ thông tin</a
+                >
+              </li>
+              <li ng-repeat="" class="list-group-item">
+                <a href="v_catagory.html" class="text-dark"
+                  >Công nghệ thông tin</a
+                >
+              </li>
+              <li ng-repeat="" class="list-group-item">
+                <a href="v_catagory.html" class="text-dark"
+                  >Công nghệ thông tin</a
+                >
+              </li>
+              <li ng-repeat="" class="list-group-item">
+                <a href="v_catagory.html" class="text-dark"
+                  >Công nghệ thông tin</a
+                >
+              </li>
+              <li ng-repeat="" class="list-group-item">
+                <a href="v_catagory.html" class="text-dark"
+                  >Công nghệ thông tin</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-9" id="">
+            <h2 id="" class="text-center m-5">Quizs</h2>
+
+            <div class="row">
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow border-0 hover-trigger">
+                  <div class="position-relative">
+                    <div class="badge-top">
+                      #1
+                      <!-- Hiển thị chỉ mục của phần tử hiện tại -->
+                    </div>
+                    <img
+                      src="public/img/html.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <a
+                      href="v_detail.html"
+                      class="show-hover btn btn-light rounded-pill position-absolute end-0 bottom-0 mb-3 me-3"
+                      ><i class="fa-regular fa-eye"></i>Xem chi tiết</a
+                    >
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Trắc nghiệm HTML - CSS</h5>
+
+                    <div
+                      class="text-warning mb-3 mt-4 d-flex align-items-center"
+                    >
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-dark ms-2">123</span>
+                    </div>
+
+                    <div class="card-title" ng-switch="ds.iddm">
+                      <div ng-switch-when="1">Chủ đề: Công nghệ tông tin</div>
+                    </div>
+                    <a
+                      href=""
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      ng-click="showQuiz(ds)"
+                      >[Xem thêm]</a
+                    >
+                    <!--(ds) nghĩa là từ listQuiz mình gán cho ds nên cầm nó để lấy ra-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow border-0 hover-trigger">
+                  <div class="position-relative">
+                    <div class="badge-top">
+                      #1
+                      <!-- Hiển thị chỉ mục của phần tử hiện tại -->
+                    </div>
+                    <img
+                      src="public/img/html.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <a
+                      href="v_detail.html"
+                      class="show-hover btn btn-light rounded-pill position-absolute end-0 bottom-0 mb-3 me-3"
+                      ><i class="fa-regular fa-eye"></i>Xem chi tiết</a
+                    >
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Trắc nghiệm HTML - CSS</h5>
+
+                    <div
+                      class="text-warning mb-3 mt-4 d-flex align-items-center"
+                    >
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-dark ms-2">123</span>
+                    </div>
+
+                    <div class="card-title" ng-switch="ds.iddm">
+                      <div ng-switch-when="1">Chủ đề: Công nghệ tông tin</div>
+                    </div>
+                    <a
+                      href=""
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      ng-click="showQuiz(ds)"
+                      >[Xem thêm]</a
+                    >
+                    <!--(ds) nghĩa là từ listQuiz mình gán cho ds nên cầm nó để lấy ra-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow border-0 hover-trigger">
+                  <div class="position-relative">
+                    <div class="badge-top">
+                      #1
+                      <!-- Hiển thị chỉ mục của phần tử hiện tại -->
+                    </div>
+                    <img
+                      src="public/img/html.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <a
+                      href="v_detail.html"
+                      class="show-hover btn btn-light rounded-pill position-absolute end-0 bottom-0 mb-3 me-3"
+                      ><i class="fa-regular fa-eye"></i>Xem chi tiết</a
+                    >
+                  </div>
+
+                  <div class="card-body">
+                    <h5 class="card-title">Trắc nghiệm HTML - CSS</h5>
+
+                    <div
+                      class="text-warning mb-3 mt-4 d-flex align-items-center"
+                    >
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-dark ms-2">123</span>
+                    </div>
+
+                    <div class="card-title" ng-switch="ds.iddm">
+                      <div ng-switch-when="1">Chủ đề: Công nghệ tông tin</div>
+                    </div>
+                    <a
+                      href=""
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      ng-click="showQuiz(ds)"
+                      >[Xem thêm]</a
+                    >
+                    <!--(ds) nghĩa là từ listQuiz mình gán cho ds nên cầm nó để lấy ra-->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col-md-6 col-sm-12 mb-5">
+                <img
+                  src="public/img/bannerItem.png"
+                  class="card-img-top"
+                  alt=""
+                  id="bannerItemLeft"
+                />
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <img
+                  src="public/img/bannerItem2.png"
+                  class="card-img-top"
+                  alt=""
+                  id="bannerItemRight"
+                />
+              </div>
+            </div>
+
+            <h2 class="text-center m-5">TÀI LIỆU THAM KHẢO</h2>
+            <div class="row">
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-5">
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 col-xs-6 mb-3"
+                style="height: 200px"
+              >
+                <div class="card shadow">
+                  <img
+                    src="public/img/quiz.png"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a href="#">Bài trắc nghiệm khoa học nhân văn I</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content p-3">
+            <div class="modal-header border-0">
+              <h1 class="modal-title fs-3" id="exampleModalLabel">
+                {{modal.name}}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">{{modal.content}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer text-light">
+      <div class="container">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden"
+                    >Email address</label
+                  >
+                  <input
+                    id="newsletter1"
+                    type="text"
+                    class="form-control"
+                    placeholder="Email address"
+                  />
+                  <button class="btn btn-primary" type="button">
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div
+            class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top"
+          >
+            <p>© 2024 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3">
+                <a class="link-body-emphasis" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#twitter"></use></svg
+                ></a>
+              </li>
+              <li class="ms-3">
+                <a class="link-body-emphasis" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#instagram"></use></svg
+                ></a>
+              </li>
+              <li class="ms-3">
+                <a class="link-body-emphasis" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#facebook"></use></svg
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </footer>
+
+    <!-- thư viện ScrollReveal.js : chuyển động mượt -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- thư viện animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="public/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
